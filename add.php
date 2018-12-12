@@ -68,7 +68,7 @@
 				 <li class="nav-item">
                 		<a class="nav-link" href="#">
                   		<span data-feather="shopping-cart"></span>
-							<button class="btn btn-outline-dark btn-block"onclick="location.href='/excel_export.php'">Excel匯出資料</button>
+							<button class="btn btn-outline-dark btn-block"onclick="location.href='/excel_export.php?F_TYPE=&F_NAME='">Excel匯出資料</button>
                 		</a>
              	 </li>
 				
