@@ -52,9 +52,10 @@ class db{
         mysqli_query($this->conn(),$string);
     }
     function delete($string){
-        mysqli_query($this->conn(),$string);
-
-        
+        mysqli_query($this->conn(),$string);  
+    }
+    function update($string){
+        mysqli_query($this->conn(),$string);  
     }
 
 
