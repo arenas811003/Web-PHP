@@ -11,64 +11,6 @@ function text(){
 	}
 
 }
-// $('form').on('submit', function(){
-//     $.ajax({
-//         url: 'test.php',              // 要傳送的頁面
-//         method: 'POST',               // 使用 POST 方法傳送請求
-//         dataType: 'json',             // 回傳資料會是 json 格式
-//         data: $('form').serialize(),  // 將表單資料用打包起來送出去
-//         success: function(data){
-			
-// 			if(data == true){
-// 				alert("新增成功");
-// 			}
-//             // 成功以後會執行這個方法
-//         }
-//     });
-// 	return false;  // 阻止瀏覽器跳轉
-	
-// });
-
-
-// function check(url){
-//     var select=document.getElementById('select').value;
-// 	var add2=document.getElementById('add2').value; 
-    
-// 	if(select != "" && add2 != ""){	
-		
-// 		data="select="+select+"&add2="+add2;
-//         console.log(url);
-// 		$.ajax({
-// 			type:'POST',
-// 			url:url,
-// 			data : data,
-// 			dataType:'text',
-
-// 			success:function(data){
-// 				console.log(data);
-//                 if(data == true){
-						
-// 					document.getElementById("form").submit();
-// 					alert("新增成功");
-// 					location.href="add.php";
-					
-							
-//                 }else{
-
-// 					alert('資料已存在');
-// 				}
-// 			}
-// 		});			
-	
-// 	}else{
-	
-// 		if(select== "" || add2 == ""){
-			
-// 			alert("請輸入類別與工程");
-// 		}
-// 	}
-// }
-    
 
 function FtypeCheck(url){
     var add=document.getElementById('add').value;   
@@ -78,8 +20,7 @@ function FtypeCheck(url){
 				type:'GET',
 				url:url,
 				data : data,
-                dataType:'text',
-                
+                dataType:'text',  
 				success:function(data){ 
                     if(data == true){
                         alert("新增成功");
