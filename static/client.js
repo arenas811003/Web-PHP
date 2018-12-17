@@ -48,16 +48,16 @@ function update_check(url){
 
 			success:function(data){
 				suc(data);
-			/*
-				if(data=="true"){
+			
+				if(data==true){
 				
-					update_post_bar();
+					//update_post_bar();
 
 				}else{
 
 					alert('資料名稱已存在');
 				}
-			*/
+			
 			}
 		});			
 
@@ -418,9 +418,7 @@ function update(id,Type){
 	str= id;
 	FID = str.split("-")[1];
 	console.log(FID);
-	location.href="/update_page?FID="+FID+"&F_TYPE="+F_TYPE;
-	
-	
+	location.href="/update_page?FID="+FID+"&F_TYPE="+F_TYPE;		
 	
 }
 function Del_but(id, url){
