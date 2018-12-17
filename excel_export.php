@@ -49,7 +49,7 @@
                 	<a class="nav-link" href="#">
 						<span data-feather="file"></span>
 						  
-						<button class="btn btn-outline-dark btn-block"onclick="location.href='/index?startRow=0&endRow=7&start=1'">搜尋/修改工作</button>
+						<button class="btn btn-outline-dark btn-block"onclick="location.href='/search.php?F_TYPE=&F_NAME=&startRow=0&endRow=7&start=1'">搜尋/修改工作</button>
                 		</a>
              		     </li>
               		     <li class="nav-item">
@@ -116,9 +116,7 @@
 
                                         
                                         <option> </option>
-
-                                        
-                                            
+     
 
                                     </select>
                                     <span> &nbsp;</span>
@@ -129,14 +127,7 @@
                                     <span> &nbsp;</span>
                                     <input class="btn btn-outline-dark my-0 my-sm-10" type="button" value="搜尋" onclick="search_data('/excel_export.php?')">
                                 </form>
-                                <form class="form-inline" >
-                                    <span> &nbsp;</span>
-                                    <!-- <span> 關鍵字搜尋: </span> -->
-                                    <span> &nbsp;</span>
-                                    <!-- <input type="text" id="keyword" onkeypress="if (event.keyCode == 13){keywords(); return false;}">	 -->
-                                    <span> &emsp;</span>
-                                    <!-- <input class="btn btn-outline-dark my-0 my-sm-10" type="button" value="搜尋" onclick='keywords("/excel_export.php?")'> -->
-                                </form>
+                             
                                 <form class="form-inline" >
                                     <span> &nbsp;</span>
                                     <span> Excel: </span>
@@ -183,7 +174,7 @@
 
                                     if(empty($_GET['F_TYPE']) && !empty($_GET['F_NAME'])){//搜尋工程
                                         
-                                        $sql = "select * from Manual where F_NAME = '$F_NAME'";
+                                        $sql = "select * from Manual where F_NAME like '%$F_NAME%'";
                                         $lengh=showline($sql); 
                                         if($lengh<1){
 

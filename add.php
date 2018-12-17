@@ -49,7 +49,7 @@
                 	<a class="nav-link" href="#">
 						<span data-feather="file"></span>
 						  
-						<button class="btn btn-outline-dark btn-block"onclick="location.href='/index?startRow=0&endRow=7&start=1'">搜尋/修改工作</button>
+						<button class="btn btn-outline-dark btn-block"onclick="location.href='/search.php?F_TYPE=&F_NAME=&startRow=0&endRow=7&start=1'">搜尋/修改工作</button>
                 		</a>
              		     </li>
               		     <li class="nav-item">
