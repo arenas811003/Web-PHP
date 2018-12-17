@@ -182,14 +182,14 @@
                                         }           
                                         exit;
                                     }
-                                    if(empty($_GET['F_TYPE']) && empty($_GET['F_TYPE'])){//搜尋所有類別、工程
+                                    if(empty($_GET['F_TYPE']) && empty($_GET['F_NAME'])){//搜尋所有類別、工程
                                         
                                         $sql = "select * from Manual";
                                         showline($sql);
                                         
                                     }
 
-                                    if(!empty($_GET['F_TYPE']) && !empty($_GET['F_TYPE'])){//搜尋類別、工程
+                                    if(!empty($_GET['F_TYPE']) && !empty($_GET['F_NAME'])){//搜尋類別、工程
                                         
                                         $sql = "select * from Manual where F_TYPE = '$F_TYPE' and F_NAME = '$F_NAME'";
                                         showline($sql);
