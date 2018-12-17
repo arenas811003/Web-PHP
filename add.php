@@ -150,39 +150,7 @@
 				</main>	
 	</body>	
 </html>	
-<?php
 
-// if(!empty($_POST['select'] && $_POST['add2'])){    //新增類別、工程、圖片
-//     $F_NAME = $_POST['select'];
-// 	$F_TYPE = $_POST['add2'];
-	 
-//     $check = "select * from Manual where F_NAME ='$F_NAME' and F_TYPE ='$F_TYPE'" ;
-//     //$db = new db;
-//     $row=$db->select($check);
-// 	//print($row['F_NAME']);
-//     if($row['F_NAME'] != null){
-// 		echo "<script type='text/javascript'>";
-// 		echo "alert('資料已存在');";
-//         echo "</script>";  
-//     }else{
-//         $insert = "insert into Manual(F_NAME,F_TYPE)VALUE('$F_NAME','$F_TYPE')";//新增資料
-//         $db->insert($insert);
-//         echo "<script type='text/javascript'>";
-// 		echo "alert('新增成功');";
-//         echo "</script>";        
-//     }   
-//     if (!empty($_FILES['file']['name'])){ //新增圖片
-//         move_uploaded_file($_FILES["file"]["tmp_name"],"upload/".$_FILES["file"]["name"]);
-//     }  
-   
-// }else{
-// 		echo "<script type='text/javascript'>";
-// 		echo "alert('請輸入類別與工程');";
-// 		echo "</script>";  
-// }
-    
-
-?>
 
 
 
