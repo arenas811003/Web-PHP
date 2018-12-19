@@ -1,8 +1,5 @@
 <html>
-    <?php
-        include 'session.php';
-
-    ?>
+    <?php include 'session.php';?>
 	<head>
         <meta charset="utf-8">
         
@@ -205,12 +202,7 @@
                                     }
                                     
                                 ?>
-                            <!-- {%for record in showline%}
-                                <tr>
-                                    <td>{{record[1]}}</td>
-                                    <td>{{record[2]}}</td>
-                                </tr>
-                            {% endfor %} -->
+                  
                             </tbody>
                         </table>
                 </html>
