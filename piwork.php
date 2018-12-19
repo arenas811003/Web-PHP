@@ -1,8 +1,5 @@
 <html>
-	<?php
-       include 'session.php';
-
-    ?>
+	<?php include 'session.php';?>
 	<head>
         <meta charset="utf-8">
         
@@ -38,11 +35,11 @@
      			<li class="nav-item">
                 		<a class="nav-link" href="#">
                   			<span data-feather="shopping-cart"></span>
-							  <?php
+							<?php
                                 if($_SESSION['permission'] == 0){  
                                     echo "<button class='btn btn-outline-dark btn-block' onclick=location.href='/user.php'>使用者管理</button>";
                                 }
-                            	?>
+                            ?>
                 		</a>
              	</li>
 				
@@ -89,41 +86,56 @@
 				<div id="footer"> 
 				<html>
 					<head>
-							<script type="text/javascript"src="static\excel_import.js"></script>
+							<script type="text/javascript"src="static\piwork.js"></script>
+							
 					</head>
-					<h1>Excel/圖片新增工作</h1>
-                        <form method="POST" id="form" name="form" action='excel_import2.php'enctype="muktipart/form-data" >
-                            
-							<th>Excel檔案:<th><input id="excel"name = "file" type = "file" accept = "application/vnd.ms-excel">	
-							<input type = "button" onclick="Excel_ajax('form')" value="新增" ><br><br>
-						</form>
+					
+					<h1>工作清單</h1>
+						<table class="table table-hover">
 
-						<form method="POST" id="PDF" name="PDF" action="pdf_import.php" enctype="multipart/form-data">
-							<th>JPEG圖片檔:<th><input id="file"name = "file[]" type = "file"multiple='multiple' accept = "application/image/gif,image/jpeg,image/png">	
-							<input type = "button" onclick="PDF_ajax('PDF')" value="新增" ><br><br>
-							<!--input type = "submit"  value="新增" -->
-						</form>
 						<tr>
-						<span id="ajax"></span><br>
-						
-						<div class="progress">
-							<div id="bar"class="progress-bar progress-bar-striped"role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"><span id="percent"></span></div>
-						</div>
-
-						<span id="message"></span><br>
-						<span id="htmltext"></span><br>
+							<th>名稱</th>
+							<th>類別</th>
+							<th>工程</th>
+							<th>網卡名稱</th> 
+							<?php
+							if($_SESSION['permission'] != 2 ){	
+								echo	"<th>修改/指派</th> 
+										<th>刪除</th> ";
+							}
+							?>
 						</tr>
-
-				</html>
-				
-				
-				
+						<?php
+							include 'mysql.php';
+							$select = "select a.PID,a.P_NAME,a.P_DESCRIBE,b.F_TYPE,b.F_NAME from Pi_list a left outer join Manual b on P_FID = FID";
+							$db = new db;
+							$row = $db->select_array($select);
+							$lengh=count($row);
+						
+							for($i=0;$i<=$lengh-1;$i++){
+								$PID=$row[$i][0];
+								$piname=$row[$i][1];
+								$describe = $row[$i][2];
+								$F_TYPE = $row[$i][3];
+								$F_NAME = $row[$i][4];
+								echo"<tr>
+										<td>$describe</td>
+										<td>$F_TYPE</td>
+										<td>$F_NAME</td>
+										<td>$piname</td>";
+								if($_SESSION['permission'] != 2){																
+								echo "<td><button id='$PID'class='btn btn-outline-dark' onclick=location.href='/piwork_page.php?PID=$PID&P_DESCRIBE=$describe&F_TYPE=$F_TYPE&F_NAME=$F_NAME'>指派工作</button></td>
+									  <td><button id='$PID'class='btn btn-outline-dark' onclick=Delete(this.id,'/piwork2.php')>刪除資料</button></td>						
+									  </tr>";
+								}
+							}
+						?>						
+					</table>
+				</html>			
                 </div>
-				
 			</main>	
 	</body>	
 </html>	
-<?php
 
 
 

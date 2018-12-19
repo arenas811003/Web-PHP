@@ -1,8 +1,5 @@
 <html>
-	<?php
-       include 'session.php';
-
-    ?>
+	<?php include 'session.php';?>
 	<head>
         <meta charset="utf-8">
         
@@ -42,7 +39,7 @@
                                 if($_SESSION['permission'] == 0){  
                                     echo "<button class='btn btn-outline-dark btn-block' onclick=location.href='/user.php'>使用者管理</button>";
                                 }
-                            	?>
+                            ?>
                 		</a>
              	</li>
 				
@@ -89,41 +86,78 @@
 				<div id="footer"> 
 				<html>
 					<head>
-							<script type="text/javascript"src="static\excel_import.js"></script>
+							<script type="text/javascript"src="static\piwork.js"></script>
+							
 					</head>
-					<h1>Excel/圖片新增工作</h1>
-                        <form method="POST" id="form" name="form" action='excel_import2.php'enctype="muktipart/form-data" >
-                            
-							<th>Excel檔案:<th><input id="excel"name = "file" type = "file" accept = "application/vnd.ms-excel">	
-							<input type = "button" onclick="Excel_ajax('form')" value="新增" ><br><br>
+					
+						<h1>指派工作項目</h1>
+						<form method="POST" id="form" name="form" action="">
+                        <?php
+                            if(!empty($_GET['P_DESCRIBE'])){
+                                $describe=$_GET['P_DESCRIBE'];
+                                echo "<th>名稱:</th><input type = 'text' name='add' value='$describe'>";
+                            }
+                        ?>
+							<input type = "button"class="btn btn-outline-dark"  value="修改"onclick = "modify('/piwork2.php')">
 						</form>
 
-						<form method="POST" id="PDF" name="PDF" action="pdf_import.php" enctype="multipart/form-data">
-							<th>JPEG圖片檔:<th><input id="file"name = "file[]" type = "file"multiple='multiple' accept = "application/image/gif,image/jpeg,image/png">	
-							<input type = "button" onclick="PDF_ajax('PDF')" value="新增" ><br><br>
-							<!--input type = "submit"  value="新增" -->
+						<span>當前工作項目</span>
+
+						<form>
+                        
+                            <?php
+                                if(!empty($_GET['F_TYPE']) && !empty($_GET['F_NAME']) && !empty($_GET['PID'])){
+                                    $F_TYPE = $_GET['F_TYPE'];
+								    $F_NAME = $_GET['F_NAME'];
+                                    $PID=$_GET['PID'];
+                                    echo "<span>類別:$F_TYPE</span>
+                                        <span>工程:$F_NAME</span>";
+                                    echo "<input type='hidden' id='pid' name='pid' value='$PID'>";
+                                }
+                            ?>
+							
+							
 						</form>
-						<tr>
-						<span id="ajax"></span><br>
-						
-						<div class="progress">
-							<div id="bar"class="progress-bar progress-bar-striped"role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"><span id="percent"></span></div>
+
+							<div class="input-group">
+							<form id="form" class="form-inline" >
+
+							<span>類別: </span>
+							<select id = "select"class="custom-select mr-sm-3" onclick="F_NAME(this)">
+
+									<option></option>
+									<?php
+                                        include 'mysql.php';
+                                        $select = "select distinct F_TYPE from Manual";
+                                        $db = new db;
+                                        $row = $db->select_array($select);
+                                        $lengh=count($row);
+                                        print_r($lengh);
+                                        for($i=0;$i<=$lengh-1;$i++){
+                                         
+                                            echo "<option>".$row[$i][0]."</option>";
+                                        } 
+                                       
+                                    ?>
+							</select>
+								
+							<span>工程: </span>
+
+							    <select id = "select_"class="custom-select mr-sm-3">
+
+							</select>
+
+								<input class="btn btn-outline-dark my-0 my-sm-10" type="button" value="指派" onclick='piwork_page("/piwork2.php")'>
+
+							</form>
 						</div>
 
-						<span id="message"></span><br>
-						<span id="htmltext"></span><br>
-						</tr>
-
 				</html>
-				
-				
-				
-                </div>
-				
+                </div>	
 			</main>	
 	</body>	
 </html>	
-<?php
+
 
 
 

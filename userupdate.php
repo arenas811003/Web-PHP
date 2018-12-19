@@ -42,7 +42,7 @@
                                 if($_SESSION['permission'] == 0){  
                                     echo "<button class='btn btn-outline-dark btn-block' onclick=location.href='/user.php'>使用者管理</button>";
                                 }
-                            	?>
+                            ?>
                 		</a>
              	</li>
 				
@@ -69,7 +69,7 @@
 			     <li class="nav-item">
                 		<a class="nav-link" href="#">
                   		<span data-feather="shopping-cart"></span>
-							<button class="btn btn-outline-dark btn-block"onclick="location.href='/excel_import.php'">JPEG/Excel新增</button>
+							<button class="btn btn-outline-dark btn-block"onclick="location.href='/excel_import.php'">PDF/Excel新增</button>
                 		</a>
              	 </li>
 				
@@ -89,34 +89,60 @@
 				<div id="footer"> 
 				<html>
 					<head>
-							<script type="text/javascript"src="static\excel_import.js"></script>
+							<script type="text/javascript"src="static\user.js"></script>
+							
 					</head>
-					<h1>Excel/圖片新增工作</h1>
-                        <form method="POST" id="form" name="form" action='excel_import2.php'enctype="muktipart/form-data" >
+					
+                    <h1>修改名稱/密碼/權限</h1>
+                    <form method="POST" id="form" name="form" action="" class="form-inline">
+                    
+                    <?php
+
+                        include 'mysql.php';
+                            $name=$_GET['name'];
+                            $account=$_GET['account'];
+                            $email=$_GET['email'];
+                            $permission=$_GET['permission'];
+                            $db= new db;
                             
-							<th>Excel檔案:<th><input id="excel"name = "file" type = "file" accept = "application/vnd.ms-excel">	
-							<input type = "button" onclick="Excel_ajax('form')" value="新增" ><br><br>
-						</form>
+                            $psw_sql="select password from user where account = '$account'";
+                            $password=$db->select($psw_sql);
+                            $password=$password['password'];
+                                echo"<th>名稱:<th><input type = 'text' id='name' name='name' value='$name'>
+                                    <input type = 'hidden' id='account'value='$account'>
+                                    <th>密碼:<th><input type = 'password' id='password'name='password' value='$password'>
+                                    <th>Email:<th><input type = 'text' id='email'name='email' value='$email'>
+                                    <th>權限:<th>
+									<select class='custom-select mr-sm-3'id='select' name='select' >";
+							if($account == "Admin"){
 
-						<form method="POST" id="PDF" name="PDF" action="pdf_import.php" enctype="multipart/form-data">
-							<th>JPEG圖片檔:<th><input id="file"name = "file[]" type = "file"multiple='multiple' accept = "application/image/gif,image/jpeg,image/png">	
-							<input type = "button" onclick="PDF_ajax('PDF')" value="新增" ><br><br>
-							<!--input type = "submit"  value="新增" -->
-						</form>
-						<tr>
-						<span id="ajax"></span><br>
+								echo "<option>主控端</option>";
+							}
+							if($permission==0 && $account != "Admin"){
+								echo "<option>主控端</option>
+									 <option>主管端</option>
+                                     <option>客戶端</option>";
+                            }
+                            if($permission==1){
+								echo "<option>主管端</option>
+									 <option>主控端</option>
+                                     <option>客戶端</option>";
+                            }
+                            if($permission==2){
+								echo "<option>客戶端</option>
+									 <option>主控端</option>
+                                     <option>主管端</option>";
+                            }
 						
-						<div class="progress">
-							<div id="bar"class="progress-bar progress-bar-striped"role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"><span id="percent"></span></div>
-						</div>
-
-						<span id="message"></span><br>
-						<span id="htmltext"></span><br>
-						</tr>
+						
+							 echo "</select>";
+                                     
+                    ?>
+							<input type = "button"class="btn btn-outline-dark"  value="修改" onclick="userupdate('/user2.php');"><br><br>
+						</form>
 
 				</html>
-				
-				
+							
 				
                 </div>
 				

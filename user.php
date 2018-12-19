@@ -1,10 +1,10 @@
+
 <html>
-
-
 	<?php
        include 'session.php';
 
     ?>
+
 	<head>
         <meta charset="utf-8">
         
@@ -13,7 +13,8 @@
 		<script type="text/javascript"src="dist/js/jquery.min.js"></script>
 		<script type="text/javascript" src="bootstrap-4.1.3/dist/js/bootstrap.min.js"></script>
    		
-	</head>
+    </head>
+    
 	<body>
 			
    		    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-1 shadow">
@@ -39,7 +40,7 @@
 			
      			<li class="nav-item">
                 		<a class="nav-link" href="#">
-                  			<span data-feather="shopping-cart"></span>
+                              <span data-feather="shopping-cart"></span>
 							  <?php
                                 if($_SESSION['permission'] == 0){  
                                     echo "<button class='btn btn-outline-dark btn-block' onclick=location.href='/user.php'>使用者管理</button>";
@@ -89,79 +90,84 @@
         		<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-3">
 				<canvas class="my-3 w-100" id="myChart" width="800" height="0"></canvas>
 				<div id="footer"> 
-                <html>
-                        <head>
-                            <script type="text/javascript"src="static\additem.js"></script>
-                            <script type="text/javascript"src="dist\js\jquery.min.js"></script>
-                        </head>
-
-                        <h1>新增工作項目</h1>
-                        <!-- <form method="GET" id="form" name="form" action="additem.php" enctype="multipart/form-data"> -->
-                        <input type="radio" name="radio"id="radio1" onclick="text()">
-                        <span>新增類別 </span>
-                        <input type="radio" name="radio"id="radio2" onclick="text()" checked>
-                        <span>新增工程 </span><br>
-                        
-                        <div id="1" style="display:inline-block">
-                        <form method="POST" id="form" name="form" action="additem.php"  enctype="multipart/form-data">
-                        <span>類別: </span>
-                            <select id="select" name="select">
-                                    <option></option>
+				<html>
+					<head>
+							<script type="text/javascript"src="static\user.js"></script>
+							
+					</head>
+					
+					    <h1>使用者管理
+	                    <button class="btn btn-outline-dark" onclick="location.href='/newuser.php';">新增使用者</button>
+                        </h1>
+                        <table class="table table-hover">
+                            <tr>
+                                <th>名稱</th>
+                                <th>帳號</th>
+                                <th>信箱</th>
+                                <th>使用者權限</th> 
+                                <th>修改名稱/密碼/權限</th> 
+                                <th>刪除使用者</th> 
+                            </tr>
                                 
-                                 <?php 
+                            <?php
+                                    
+
                                     include 'mysql.php';
-                                    $select = "select F_TYPE from TYPE";
+                                    $select = "select * from User";
                                     $db = new db;
                                     $row = $db->select_array($select);
                                     $lengh=count($row);
-                                    print_r($lengh);
+                                    //print_r($lengh);
                                     for($i=0;$i<=$lengh-1;$i++){
-                                        echo "<option>".$row[$i][0]."</option>";
+                                       // echo "<option>".$row[$i][0]."</option>";
+                                        $ID=$row[$i][0];
+                                        $username=$row[$i][1];
+                                        $account = $row[$i][2];
+                                        $email=$row[$i][4];
+										$permission=$row[$i][5];
+										
+
+
+                                    echo"<tr>
+                                            <td>$username</td>
+                                            <td>$account</td>
+                                            <td>$email</td>";
+                                            if($permission == 0){
+                                                echo "<td>主控端</td>";
+                                            }
+                                            if($permission == 1){
+                                                echo "<td>主管端</td>";
+                                            }
+                                            if($permission == 2){
+                                                echo "<td>客戶端</td>";
+											}
+											
+                                            //echo"<td><button id='$ID'class='btn btn-outline-dark'  onclick=post('test.php','id=$ID&name=$username&account=$account&email=$email&permission=$permission')>修改</button></td>";
+											echo"<td><button id='$ID'class='btn btn-outline-dark' onclick=location.href='/userupdate.php?id=$ID&name=$username&account=$account&email=$email&permission=$permission'>修改</button></td>";
+											if($account != "Admin"){
+												echo "<td><button id='$ID'class='btn btn-outline-dark' onclick=\"Delete(this.id,'user2.php')\">刪除</button></td>";
+											}else{
+												echo "<td><button id='$ID'class='btn btn-outline-dark' onclick=\"StopDel()\">刪除</button></td>";
+											}
+											
+											
+									echo "</tr>";
+											
                                     }
+
                                  
-                                 ?>
-                                
-                            </select>
-                            <th>工程:<th><input type = "text" name="add2" id="add2">
-                            <th>圖片:<th><input name = "file" type = "file" multiple="multiple"enctype="multiple/form-data" accept = "image/gif,image/jpeg,image/png">
-                            <input type = "submit"class="btn btn-outline-dark" value="新增"   >
- 							<!-- <input type = "submit"class="btn btn-outline-dark" value="新增"  onclick="check('add.php')" > -->
-
-                        </form>
-						
-
-                        </div>	
-                        <div id="2" style="display:none">
-                            <form method="GET" id="form2" name="form2" action="additem.php">
-                                <th>新增類別:<th><input type = "text" name="select" id="add">
-                                <input type = "button"class="btn btn-outline-dark" value="新增" onclick="FtypeCheck('additem.php')">
-                            </form>
                             
-                            <span>所有類別: </span>
-                            <select id="select2" name="select2">
-                                    <option></option>
-
-                                    <?php 
-    
-                                        for($i=0;$i<=$lengh-1;$i++){
-                                            echo "<option>".$row[$i][0]."</option>";
-                                        }
-                                
-                                    ?> 
+                                    
                             
                             
-                                    <input type = "button"class="btn btn-outline-dark" value="刪除" onclick="Del_Type('additem.php');">
-                            </select>
-
-                        </div>
-                </html>
-                </div>
+                            ?>
+                        </table>
+				</html>
+							
+            </div>
 				
-				</main>	
+		</main>	
 	</body>	
 </html>	
 
 
-
-
-   

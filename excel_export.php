@@ -1,4 +1,8 @@
 <html>
+    <?php
+        include 'session.php';
+
+    ?>
 	<head>
         <meta charset="utf-8">
         
@@ -13,13 +17,13 @@
    		    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-1 shadow">
 				
 			
-      		<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/model.php";>&nbsp;&emsp;PHP-SERVER</a>
+      		<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/search.php?F_TYPE=&F_NAME=&startRow=0&endRow=7&start=1";>&nbsp;&emsp;PHP-SERVER</a>
 			
 			
 			<ul class="navbar-nav px-3">
 		         <li class="nav-item text-nowrap">
 			  
-			  <button class="btn btn-outline-success"onclick="window.location.replace('/logout')">登出</button>
+			  <button class="btn btn-outline-success"onclick="window.location.replace('/logout.php')">登出</button>
 		         </li>
       			</ul>
     		    </nav>
@@ -34,14 +38,18 @@
      			<li class="nav-item">
                 		<a class="nav-link" href="#">
                   			<span data-feather="shopping-cart"></span>
-							<button class="btn btn-outline-dark btn-block" onclick="location.href='/user'">使用者管理</button>
+                              <?php
+                                if($_SESSION['permission'] == 0){  
+                                    echo "<button class='btn btn-outline-dark btn-block' onclick=location.href='/user.php'>使用者管理</button>";
+                                }
+                            ?>
                 		</a>
              	</li>
 				
 		        <li class="nav-item">
 			     		 <a class="nav-link active" href="#">
 			        		<span data-feather="home"></span>
-				 			 <button class="btn btn-outline-dark btn-block"onclick="location.href='/piwork'">指派工作項目</button>
+				 			 <button class="btn btn-outline-dark btn-block"onclick="location.href='/piwork.php'">指派工作項目</button>
                  			<span class="sr-only">(current)</span>
                 		</a>
               		      </li>

@@ -42,7 +42,7 @@
                                 if($_SESSION['permission'] == 0){  
                                     echo "<button class='btn btn-outline-dark btn-block' onclick=location.href='/user.php'>使用者管理</button>";
                                 }
-                            	?>
+                            ?>
                 		</a>
              	</li>
 				
@@ -69,7 +69,7 @@
 			     <li class="nav-item">
                 		<a class="nav-link" href="#">
                   		<span data-feather="shopping-cart"></span>
-							<button class="btn btn-outline-dark btn-block"onclick="location.href='/excel_import.php'">JPEG/Excel新增</button>
+							<button class="btn btn-outline-dark btn-block"onclick="location.href='/excel_import.php'">PDF/Excel新增</button>
                 		</a>
              	 </li>
 				
@@ -89,38 +89,36 @@
 				<div id="footer"> 
 				<html>
 					<head>
-							<script type="text/javascript"src="static\excel_import.js"></script>
+							<script type="text/javascript"src="static\user.js"></script>
+							
 					</head>
-					<h1>Excel/圖片新增工作</h1>
-                        <form method="POST" id="form" name="form" action='excel_import2.php'enctype="muktipart/form-data" >
-                            
-							<th>Excel檔案:<th><input id="excel"name = "file" type = "file" accept = "application/vnd.ms-excel">	
-							<input type = "button" onclick="Excel_ajax('form')" value="新增" ><br><br>
+					
+					
+					<h1>新增使用者</h1>
+						<form method="POST" id="form" name="form" action="test.php" class="form-inline">
+							<th>名稱:</th><input type = "text" id="name" name ="name">
+							<th>帳號:</th><input type = "text" id="account" name = "account">
+							<th>密碼:</th><input type = "password" id="password" name = "password">
+							<th>Email:<th><input type = "text" id="email" name= "email"value="">
+							<span>使用權限:</span>
+							<select id ="select"class="custom-select mr-sm-3">
+									<option></option>
+									<option>主控端</option>
+									<option>主管端</option>
+									<option>客戶端</option>
+							</select>
+							<input class="btn btn-outline-dark my-0 my-sm-10" type="button" value="新增" onclick="newuser('user2.php')">
+                                                                                                                                                
 						</form>
 
-						<form method="POST" id="PDF" name="PDF" action="pdf_import.php" enctype="multipart/form-data">
-							<th>JPEG圖片檔:<th><input id="file"name = "file[]" type = "file"multiple='multiple' accept = "application/image/gif,image/jpeg,image/png">	
-							<input type = "button" onclick="PDF_ajax('PDF')" value="新增" ><br><br>
-							<!--input type = "submit"  value="新增" -->
-						</form>
-						<tr>
-						<span id="ajax"></span><br>
-						
-						<div class="progress">
-							<div id="bar"class="progress-bar progress-bar-striped"role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"><span id="percent"></span></div>
-						</div>
 
-						<span id="message"></span><br>
-						<span id="htmltext"></span><br>
-						</tr>
 
 				</html>
 				
 				
 				
-                </div>
-				
-			</main>	
+                </div>				
+		</main>	
 	</body>	
 </html>	
 <?php
