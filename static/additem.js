@@ -17,20 +17,20 @@ function FtypeCheck(url){
 	if(add != ""){
         data="add="+add;
 		$.ajax({
-			type:'GET',
-			url:url,
-			data : data,
-			dataType:'text',  
-			success:function(data){ 
-			    if(data == true){
-				alert("新增成功");
-				location.href="add.php";
-			    }else{
+				type:'GET',
+				url:url,
+				data : data,
+                dataType:'text',  
+				success:function(data){ 
+                    if(data == true){
+                        alert("新增成功");
+                        location.href="add.php";
+                    }else{
 
-				alert("資料已存在");
-			    }
-
-			}
+                        alert("資料已存在");
+                    }
+				    
+				}
 		});			
 	}else{
 	
