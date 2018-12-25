@@ -9,9 +9,16 @@ if(!empty($_POST['account']) && !empty($_POST['password'])){
     $permission = $db->select($permission_sql);
     session_start();
     $_SESSION['permission']=$permission['permission'];
-    $check_sql="select ID from user where account = '$account' and password = '$password'";
-    $login_check=$db->select($check_sql);
-    if($login_check['ID'] != null){
+
+    $check_sql="select ID from user where account = ? and password = ?"; //防止sql 輸入
+    $mysqli = new mysqli('localhost','Ten','tenpercent','ten');
+    $login_check=$mysqli->prepare($check_sql);
+    $login_check->bind_param("ss",$account,$password);
+    $login_check->execute();
+    $login_check->bind_result($id);
+    $value=$login_check->fetch();
+    //echo $value;
+    if($value != null){
 
         echo true;
     }else{
@@ -20,9 +27,7 @@ if(!empty($_POST['account']) && !empty($_POST['password'])){
     }    
     
 
-
 }
-
 
 
 ?>

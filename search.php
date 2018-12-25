@@ -153,14 +153,23 @@
 
                             <tbody>
                                 <?php
-                                    $F_TYPE = $_GET['F_TYPE'];
-                                    $F_NAME = $_GET['F_NAME'];
-                                    $start = $_GET['start'];
+                                    $F_TYPE = isset($_GET['F_TYPE']) ? $_GET['F_TYPE'] : "";
+
+                                    $F_NAME = isset($_GET['F_NAME']) ? $_GET['F_NAME'] : "";
+                                                               
+                                    $start = isset($_GET['start']) ? $_GET['start'] : 1 ;
+
+                                    if(intval($start) == 0 ){
+                                        $start = 1;
+                                    }
                                     $line = 7 ;//每頁顯示項目數量
                                     $startRow = ($start-1)*$line; //每一頁開始的資料序號
-                                    $endRow = $_GET['endRow'];//資料庫撈 n 筆資料
+                                    $endRow = isset($_GET['endRow']) ? $_GET['endRow'] : 7;//資料庫撈 n 筆資料
+                                    if(intval($endRow) == 0 ){
+                                        $endRow = 7;
+                                    }
                                     
-
+                                                                        
                                     if(!empty($_GET['F_TYPE']) && empty($_GET['F_NAME'])){//搜尋所有類別
                                         $total="select * from Manual where F_TYPE = '$F_TYPE'";                             
                                         $showline = "select * from Manual where F_TYPE = '$F_TYPE' limit $startRow,$endRow";
