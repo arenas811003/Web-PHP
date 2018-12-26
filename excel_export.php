@@ -1,5 +1,8 @@
 <html>
-    <?php include 'session.php';?>
+    <?php
+        include 'session.php';
+
+    ?>
 	<head>
         <meta charset="utf-8">
         
@@ -178,7 +181,7 @@
                                     }
 
                                     if(empty($_GET['F_TYPE']) && !empty($_GET['F_NAME'])){//搜尋工程
-                                        
+                                        $F_NAME = preg_replace("/[\'\"]*/" , '' ,$F_NAME);
                                         $sql = "select * from Manual where F_NAME like '%$F_NAME%'";
                                         $lengh=showline($sql); 
                                         if($lengh<1){
@@ -202,7 +205,12 @@
                                     }
                                     
                                 ?>
-                  
+                            <!-- {%for record in showline%}
+                                <tr>
+                                    <td>{{record[1]}}</td>
+                                    <td>{{record[2]}}</td>
+                                </tr>
+                            {% endfor %} -->
                             </tbody>
                         </table>
                 </html>

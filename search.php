@@ -180,7 +180,8 @@
                                     }
 
                                     if(empty($_GET['F_TYPE']) && !empty($_GET['F_NAME'])){//工程關鍵字搜尋
-                                        $F_NAME = preg_replace("/[\'\"]+/" , '' ,$F_NAME);
+                                        $Regular = "/^[\'\"]*/";
+                                        $F_NAME = preg_replace($Regular , "" ,$F_NAME);
                                         $total= "select * from Manual where F_NAME like '%$F_NAME%'";
                                         $showline = "select * from Manual where F_NAME like '%$F_NAME%' limit $startRow,$endRow";
                                         $Value=$db->select_array($total);
