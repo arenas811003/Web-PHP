@@ -158,7 +158,7 @@
                                     $F_NAME = isset($_GET['F_NAME']) ? $_GET['F_NAME'] : "";
                                                                
                                     $start = isset($_GET['start']) ? $_GET['start'] : 1 ;
-
+                                    
                                     if(intval($start) == 0 ){
                                         $start = 1;
                                     }
@@ -180,7 +180,7 @@
                                     }
 
                                     if(empty($_GET['F_TYPE']) && !empty($_GET['F_NAME'])){//工程關鍵字搜尋
-                                       
+                                        $F_NAME = preg_replace("/[\'\"]+/" , '' ,$F_NAME);
                                         $total= "select * from Manual where F_NAME like '%$F_NAME%'";
                                         $showline = "select * from Manual where F_NAME like '%$F_NAME%' limit $startRow,$endRow";
                                         $Value=$db->select_array($total);
