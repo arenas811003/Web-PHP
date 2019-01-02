@@ -40,11 +40,11 @@
      			<li class="nav-item">
                 		<a class="nav-link" href="#">
                   			<span data-feather="shopping-cart"></span>
-							  <?php
+								<?php
                                 if($_SESSION['permission'] == 0){  
                                     echo "<button class='btn btn-outline-dark btn-block' onclick=location.href='/user.php'>使用者管理</button>";
                                 }
-                            ?>
+                            	?>
                 		</a>
              	</li>
 				
@@ -123,7 +123,7 @@
                                 
                             </select>
                             <th>工程:<th><input type = "text" name="add2" id="add2">
-                            <th>圖片:<th><input name = "file" type = "file" multiple="multiple"enctype="multiple/form-data" accept = "image/gif,image/jpeg,image/png">
+                            <th>圖片:<th><input name = "file[]" type = "file" multiple="multiple"enctype="multiple/form-data" accept = "image/gif,image/jpeg,image/png">
                             <input type = "submit"class="btn btn-outline-dark" value="新增"   >
  							<!-- <input type = "submit"class="btn btn-outline-dark" value="新增"  onclick="check('add.php')" > -->
 
